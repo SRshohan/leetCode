@@ -1,26 +1,25 @@
-def jumpgame(nums):
-    max_reachable = 0  # The farthest index that can be reached
-    n = len(nums)
+def plusOne(digits):
+    n = len(digits)
 
-    for i in range(n):
-        # If the current index is greater than the maximum reachable index, it's not possible to proceed
-        if i > max_reachable:
-            return False
-        print(f"i : {i}")
-        # Update the maximum reachable index
-        max_reachable = max(max_reachable, i + nums[i])
+    # Start from the last digit and work backwards
+    for i in range(n - 1, -1, -1):
+        if digits[i] < 9:
+            # If the current digit is less than 9, just add one and return
+            digits[i] += 1
+            return digits
+        else:
+            # If the current digit is 9, it becomes 0 and we carry over to the next digit
+            digits[i] = 0
 
-        # Print the current index and the maximum reachable index
-        print(f"Index: {i}, Max Reachable: {max_reachable}")
-
-        # Check if the last index is reachable
-        if max_reachable >= n - 1:
-            return True
-
-    return False  # The last index is not reachable
+    # If all digits were 9, we need to add a new digit at the beginning
+    return [1] + digits
 
 
 # Example usage:
-nums = [3,2,1,0,4]
-print(jumpgame(nums))  # Expected output: True, as the last index is reachable
+digits = [4, 3, 2, 1]
+print(plusOne(digits))  # Output: [4,3,2,2]
+
+# Another example with carries:
+digits = [9, 9, 9]
+print(plusOne(digits))  # Output: [1,0,0,0]
 
